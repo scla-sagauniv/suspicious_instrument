@@ -6,4 +6,11 @@
     - pages:componentを挿入して画面を作成するためのメインとなるjsファイルを配置する。
     - css:componentやpagesのファイルに適用するcssファイルを配置する。
     - image: Webアプリで使用する画像ファイルなどを配置する。
+
+
+## 起動
+
+- /frontendフォルダにて以下のコマンドを実行
+
+    ``` npm start ```
     
