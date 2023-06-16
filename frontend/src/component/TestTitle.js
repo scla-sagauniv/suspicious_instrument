@@ -1,27 +1,39 @@
 import "../css/test.css";
+import React, { useState } from 'react';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
 
-function TestTitle () {
+function App() {
+  const [inputName, setInputName] = useState("");
+  const [inputDescription, setInputDescription] = useState("");
 
-  const [data, setData] = useState([])
+  const handleNameChange = (event) => {
+    setInputName(event.target.value);
+  };
 
-  useEffect(()=> {
-    axios.get('/api').then(res => setData(res.data));
-  }, []);
+  const handleDescriptionChange = (event) => {
+    setInputDescription(event.target.value);
+  };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-    return data.map((x, index) => {
-    return (
-      <div>
-        <h1>
-          チャットGPTを用いたタスク管理アプリケーション
-        </h1>
-        <p key={index}>
-          {x.id} {x.name} {x.age}
-        </p>
-      </div>)
-  });
-};
+    try {
+      const response = await axios.post("/data", { name: inputName, description: inputDescription, label: "" });
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
 
-export default TestTitle;
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <input type="text" value={inputName} onChange={handleNameChange} />
+        <input type="text" value={inputDescription} onChange={handleDescriptionChange} />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  );
+}
+
+export default App;
