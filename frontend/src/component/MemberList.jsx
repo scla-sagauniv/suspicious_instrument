@@ -1,4 +1,10 @@
-import Member from "./Member";
+const Member = () => {
+  return (
+    <>
+      <p>メンバー</p>
+    </>
+  );
+};
 
 const MemberList = () => {
   return (
