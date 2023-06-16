@@ -1,0 +1,85 @@
+
+  [
+     {
+        "id":1,
+        "name":"project1",
+        "members": [
+            {
+                "id": 1,
+                "name": "John Doe",
+                "email": "john@example.com"
+            },
+            {
+                "id": 2,
+                "name": "Jane Smith",
+                "email": "jane@example.com"
+            },
+            {
+                "id": 3,
+                "name": "Michael Johnson",
+                "email": "michael@example.com"
+            }
+        ],
+        "tasks": [
+            {
+                "id": 1,
+                "title": "Task 1",
+                "description": "Complete task 1",
+                "assignedTo": 1
+            },
+            {
+                "id": 2,
+                "title": "Task 2",
+                "description": "Complete task 2",
+                "assignedTo": 2
+            },
+            {
+                "id": 3,
+                "title": "Task 3",
+                "description": "Complete task 3",
+                "assignedTo": 1
+            }
+        ]
+    },
+    {
+        "id":2,
+        "name":"project2",
+        "members": [
+            {
+                "id": 1,
+                "name": "John Doe",
+                "email": "john@example.com"
+            },
+            {
+                "id": 2,
+                "name": "Jane Smith",
+                "email": "jane@example.com"
+            },
+            {
+                "id": 3,
+                "name": "Michael Johnson",
+                "email": "michael@example.com"
+            }
+        ],
+        "tasks": [
+            {
+                "id": 1,
+                "title": "Task 1",
+                "description": "Complete task 1",
+                "assignedTo": 1
+            },
+            {
+                "id": 2,
+                "title": "Task 2",
+                "description": "Complete task 2",
+                "assignedTo": 2
+            },
+            {
+                "id": 3,
+                "title": "Task 3",
+                "description": "Complete task 3",
+                "assignedTo": 1
+            }
+        ]
+    }
+]
