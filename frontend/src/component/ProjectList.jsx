@@ -1,4 +1,16 @@
-import Project from "./Project";
+import { Link } from "react-router-dom";
+
+//for文で表示するためのコンポーネント
+const Project = ({ datum }) => {
+  return (
+    <>
+      <p>{datum.name}</p>
+      <Link to="/projectPage" id={datum.id}>
+        プロジェクト{datum?.id}
+      </Link>
+    </>
+  );
+};
 
 const ProjectList = ({ projects }) => {
   const map_project_data = projects?.map((datum) => (

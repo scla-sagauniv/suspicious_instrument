@@ -1,4 +1,10 @@
-import Task from "./Task";
+const Task = () => {
+  return (
+    <>
+      <p>タスク</p>
+    </>
+  );
+};
 
 const TaskList = () => {
   return (

@@ -3,7 +3,7 @@ const TopPage = () => {
   return (
     <>
       <h1>チャットGPTを使ったタスク管理アプリケーション</h1>
-      <Link to="/projectListPage">プロジェクト一覧</Link>
+      <Link to="/projectListPage/">プロジェクト一覧</Link>
     </>
   );
 };
