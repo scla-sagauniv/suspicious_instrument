@@ -1,6 +1,7 @@
 import "../css/test.css";
 import { useForm } from "react-hook-form";
 import "../css/TaskModal.css";
+import axios from "axios";
 
 const TaskModal = (props) => {
   const { register, handleSubmit, reset } = useForm();
@@ -13,9 +14,17 @@ const TaskModal = (props) => {
     borderRadius: "3px",
   };
 
-  const onSubmit = (data) => {
-    console.log("onSubmit data", data);
-    console.log(props.todoList);
+  const onSubmit = async (data) => {
+    try {
+      await axios.post("/task", data);
+      console.log("onSubmit data", data);
+      console.log(props.project_id);
+    } catch (err) {
+      console.log(err);
+      alert(err.response.data);
+    } finally {
+      console.log(data);
+    }
     reset();
     closeModal();
   };
@@ -27,21 +36,35 @@ const TaskModal = (props) => {
           <div id="modalContent" style={modalContent}>
             <fieldset>
               <form onSubmit={handleSubmit(onSubmit)} className="form">
+                <input
+                  type="hidden"
+                  id="method"
+                  value={"add"}
+                  {...register("method")}
+                  required
+                />
+                <input
+                  type="hidden"
+                  id="project_id"
+                  value={parseInt(props?.project_id)}
+                  {...register("project_id")}
+                  required
+                />
                 <label className="TaskLabel">Task</label>
                 <input
                   type="text"
-                  id="task"
-                  {...register("task")}
+                  id="title"
+                  {...register("title")}
                   placeholder="タスクを入力してください"
                   required
                   className="inputTask"
                 />
-                <label className="contentsLabel">Contents</label>
+                <label className="contentsLabel">Description</label>
                 <input
                   className="inputContents"
                   type="text"
                   id="contents"
-                  {...register("contents")}
+                  {...register("description")}
                   placeholder="内容を入力してください"
                   required
                 />

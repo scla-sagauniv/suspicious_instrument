@@ -41,14 +41,14 @@ const MemberModal = (props) => {
               <form onSubmit={handleSubmit(onSubmit)} className="form">
                 <input
                   type="hidden"
-                  id="project_id"
+                  id="method"
                   value={"add"}
                   {...register("method")}
                   required
                 />
                 <input
                   type="hidden"
-                  id="name"
+                  id="project_id"
                   value={parseInt(props?.project_id)}
                   {...register("project_id")}
                   required
