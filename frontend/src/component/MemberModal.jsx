@@ -1,11 +1,11 @@
 import "../css/test.css";
 import { useForm } from "react-hook-form";
-import "../css/Modal.css";
+import "../css/MemberModal.css";
 
-const Modal = (props) => {
+const MemberModal = (props) => {
   const { register, handleSubmit, reset } = useForm();
   const closeModal = () => {
-    props.setShowModal(false);
+    props.setShowMemberModal(false);
   };
   const modalContent = {
     background: "white",
@@ -76,13 +76,4 @@ const Modal = (props) => {
   );
 };
 
-export default Modal;
-
-// <label>Skill</label>
-//   <input
-//     id="skills"
-//     type="text"
-//     {...register("skills")}
-//     placeholder="スキルを入力してください"
-//     required
-//   />
+export default MemberModal;
