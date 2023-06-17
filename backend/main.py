@@ -24,6 +24,10 @@ class Member(BaseModel):
     name: str
     skills: str
     method: str
+    
+class Project(BaseModel):
+    name: str
+    method: str
 
 # Taskの変更を処理する
 @app.post("/task")
@@ -100,7 +104,22 @@ def update_member(data: Member):
     else:
         pass
     
-    firebase.write_database(FIREBASE, database)                
+    firebase.write_database(FIREBASE, database)
+    
+@app.post("/project")
+def update_member(data: Project):
+    database = firebase.get_database(FIREBASE)
+    
+    if data.method == "add":
+        database.append({'name': data.name, 'members': [], 'tasks': []})
+    elif data.method == "remove":
+        for i, project in enumerate(database):
+            if project["name"] == data.name:
+                database.pop(i)
+    else:
+        pass
+    
+    firebase.write_database(FIREBASE, database)       
 
 @app.get("/database")
 def get_cloud_database():
