@@ -16,12 +16,15 @@ const Task = ({ task }) => {
 
 const TaskList = ({ pathid }) => {
   const [tasks, setTasks] = useState(null);
+  const [members, setMembers] = useState(null);
   const getAllProjects = async () => {
     const pid = parseInt(pathid);
     try {
       await axios.get("/database").then((response) => {
         //表示するデータを作成
         setTasks(response.data[pid - 1].tasks);
+        setMembers(response.data[pid - 1].members);
+        const assigned_member = members.indexOf();
       });
     } catch (error) {
       console.error("Error:", error);
