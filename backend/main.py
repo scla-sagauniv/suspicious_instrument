@@ -3,10 +3,13 @@ import firebase
 import string
 from fastapi import FastAPI
 from pydantic import BaseModel
+import json
 
 CHATGPT_API_URL = "https://api.openai.com/v1/chat/completions"
-OPENAI_API_KEY = "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"
 FIREBASE = firebase.init_database()
+
+with open("openai_api.json", "r") as file:
+    OPENAI_API_KEY = json.load(file)["api"]
 
 app = FastAPI()
     
@@ -48,18 +51,20 @@ def update_task(data: Task):
             
             if available_member:
                 available_member = sorted(available_member, reverse=True)
-                for i, member in enumerate(database[project]["members"], 1):
+                for i, member in enumerate(database[project]["members"]):
                     if member["id"] == int(available_member[0]):
                         database[project]["members"][i]["task_count"] += 1
         else:
-            prediction = "Not applicable"
+            available_member = {member["id"]: member["task_count"] for member in database[project]["members"]}
+            available_member = sorted(available_member, reverse=True)
+            for i, member in enumerate(database[project]["members"]):
+                if member["id"] == int(available_member[0]):
+                    database[project]["members"][i]["task_count"] += 1
         
         ids = list(range(1, len(database[project]["tasks"]) + 2))
         ids = [id for id in ids if id not in [task["id"] for task in database[project]["tasks"]]]
         database[project]["tasks"].append({'id': ids[0], 'title': data.title, 'description': data.description, 'assign_member': int(available_member[0])})
-        
-        # return {"description": data.description, "prediction": prediction, "assign_member": int(available_member[0])}
-    else:
+    elif data.method == "remove":
         member_id = None
         for i, task in enumerate(database[project]["tasks"]):
             if task["title"] == data.title and task["description"] == data.description:
@@ -68,21 +73,22 @@ def update_task(data: Task):
         for i, member in enumerate(database[project]["members"]):
             if member["id"] == int(member_id):
                 database[project]["members"][i]["task_count"] -= 1
+    else:
+        pass
     
     firebase.write_database(FIREBASE, database)
+    # return {"debug": data.description}
     
-# Memberの変更を処理する
 @app.post("/member")
 def update_member(data: Member):
     database = firebase.get_database(FIREBASE)
     project = int(data.project_id) - 1
     
     if data.method == "add":
-        
         ids = list(range(1, len(database[project]["members"]) + 2))
         ids = [id for id in ids if id not in [member["id"] for member in database[project]["members"]]]
         database[project]["members"].append({'id': ids[0], 'name': data.name, 'skills': data.skills, 'task_count': 0})
-    else:
+    elif data.method == "remove":
         member_id = None
         for i, member in enumerate(database[project]["members"]):
             if member["name"] == data.name and member["skills"] == data.skills:
@@ -91,10 +97,11 @@ def update_member(data: Member):
         for i, task in enumerate(database[project]["tasks"]):
             if task["assign_member"] == int(member_id):
                 database[project]["tasks"][i]["assign_member"] = None
+    else:
+        pass
     
     firebase.write_database(FIREBASE, database)                
 
-# Databaseの確認
 @app.get("/database")
 def get_cloud_database():
     return firebase.get_database(FIREBASE)
