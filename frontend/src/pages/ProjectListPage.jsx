@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import db from "../firebase/config";
 import { collection, getDocs } from "firebase/firestore";
 import { Button } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 
 import "../css/ProjectListPage.css";
 const ProjectListPage = () => {
@@ -32,9 +33,11 @@ const ProjectListPage = () => {
   return (
     <>
       <h1 className="projectPageTitle">プロジェクト一覧</h1>
-      <ProjectList projects={projects} />
+      <ProjectList projects={dummydata} />
       <div className="projectAddButton">
-        <Button variant="contained">プロジェクト追加</Button>
+        <Button variant="outlined" startIcon={<AddIcon />}>
+          プロジェクト追加
+        </Button>
       </div>
     </>
   );

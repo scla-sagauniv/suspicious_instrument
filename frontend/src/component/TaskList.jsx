@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 const Task = ({ task }) => {
   return (
     <>
-      <p>{task?.title}</p>
-      <p>{task?.description}</p>
+      <div className="taskElement">
+        <p>{task?.title}</p>
+        <p>{task?.description}</p>
+      </div>
     </>
   );
 };
@@ -22,7 +24,7 @@ const TaskList = () => {
   ));
   return (
     <>
-      <h1>タスク一覧</h1>
+      <h3 className="taskListTitle">タスク一覧</h3>
       <div>{map_tasks_data}</div>
     </>
   );
