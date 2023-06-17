@@ -5,11 +5,17 @@ import db from "../firebase/config";
 import { collection, getDocs } from "firebase/firestore";
 import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import ProjectModal from "../component/ProjectModal";
 
 import "../css/ProjectListPage.css";
 const ProjectListPage = () => {
   //プロジェクトを保持する変数
   const [projects, setProjects] = useState(null);
+
+  const [showProjectModal, setShowProjectModal] = useState(false);
+  const ShowProjectModal = () => {
+    setShowProjectModal(true);
+  };
 
   const getAllProjects = async () => {
     const CollectionRef = collection(db, "Database");
@@ -35,10 +41,18 @@ const ProjectListPage = () => {
       <h1 className="projectPageTitle">プロジェクト一覧</h1>
       <ProjectList projects={dummydata} />
       <div className="projectAddButton">
-        <Button variant="outlined" startIcon={<AddIcon />}>
+        <Button
+          variant="outlined"
+          startIcon={<AddIcon />}
+          onClick={ShowProjectModal}
+        >
           プロジェクト追加
         </Button>
       </div>
+      <ProjectModal
+        showFlag={showProjectModal}
+        setShowProjectModal={setShowProjectModal}
+      />
     </>
   );
 };
