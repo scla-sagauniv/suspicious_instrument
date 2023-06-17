@@ -7,17 +7,20 @@
             {
                 "id": 1,
                 "name": "John Doe",
-                "email": "john@example.com"
+                "skills": "python,ruby",
+                "task_count":3
             },
             {
                 "id": 2,
                 "name": "Jane Smith",
-                "email": "jane@example.com"
+                "skills": "python,ruby,C++",
+                "task_count":1
             },
             {
                 "id": 3,
                 "name": "Michael Johnson",
-                "email": "michael@example.com"
+                "skills": "C++,javascript",
+                "task_count":0
             }
         ],
         "tasks": [
@@ -42,23 +45,26 @@
         ]
     },
     {
-        "id":2,
-        "name":"project2",
+        "id":1,
+        "name":"project1",
         "members": [
             {
                 "id": 1,
                 "name": "John Doe",
-                "email": "john@example.com"
+                "skills": "python,ruby",
+                "task_count":3
             },
             {
                 "id": 2,
                 "name": "Jane Smith",
-                "email": "jane@example.com"
+                "skills": "python,ruby,C++",
+                "task_count":1
             },
             {
                 "id": 3,
                 "name": "Michael Johnson",
-                "email": "michael@example.com"
+                "skills": "C++,javascript",
+                "task_count":0
             }
         ],
         "tasks": [
