@@ -1,6 +1,7 @@
 import "../css/test.css";
 import { useForm } from "react-hook-form";
 import "../css/MemberModal.css";
+import axios from "axios";
 
 const MemberModal = (props) => {
   const { register, handleSubmit, reset } = useForm();
@@ -36,6 +37,13 @@ const MemberModal = (props) => {
             <fieldset>
               <form onSubmit={handleSubmit(onSubmit)} className="form">
                 <label className="nameLabel" for="Name">
+                  <input
+                    type="hidden"
+                    id="name"
+                    value={props?.project_id}
+                    {...register("project_id")}
+                    required
+                  />
                   Name
                 </label>
                 <input

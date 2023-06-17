@@ -17,7 +17,6 @@ const ProjectListPage = () => {
       await axios.get("/database").then((response) => {
         //表示するデータを作成
         setProjects(response.data);
-        console.log(response.data.id);
       });
     } catch (error) {
       console.error("Error:", error);

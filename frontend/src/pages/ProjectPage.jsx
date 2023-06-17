@@ -6,10 +6,12 @@ import AddIcon from "@mui/icons-material/Add";
 import "../css/ProjectPage.css";
 import MemberModal from "../component/MemberModal";
 import TaskModal from "../component/TaskModal";
+import { useLocation } from "react-router-dom";
+import { serverTimestamp } from "firebase/firestore";
 
 const ProjectPage = () => {
-  const params = useParams();
-  const [datum, setDatum] = useState(null);
+  const pathid = parseInt(useLocation().pathname.slice(-1));
+  const [projectId, setProjectId] = useState(-1);
 
   //member追加モーダルのstate
   const [showMemberModal, setShowMemberModal] = useState(false);
@@ -21,12 +23,17 @@ const ProjectPage = () => {
   //task追加モーダルのstate
   const [showTaskModal, setShowTaskModal] = useState(false);
   const ShowTaskModal = () => {
+    console.log(pathid);
     setShowTaskModal(true);
     setShowMemberModal(false);
   };
-  useEffect(() => {
-    setDatum(params);
-  }, []);
+
+  // const setIdFromPath = () => {
+  //   setProjectId(pathname);
+  // };
+  // useEffect(as () => {
+  //   setProjectId(pathid);
+  // }, []);
 
   return (
     <>
@@ -52,10 +59,15 @@ const ProjectPage = () => {
         </Button>
       </div>
       <MemberModal
+        project_id={pathid}
         showFlag={showMemberModal}
         setShowMemberModal={setShowMemberModal}
       />
-      <TaskModal showFlag={showTaskModal} setShowTaskModal={setShowTaskModal} />
+      <TaskModal
+        project_id={pathid}
+        showFlag={showTaskModal}
+        setShowTaskModal={setShowTaskModal}
+      />
     </>
   );
 };
