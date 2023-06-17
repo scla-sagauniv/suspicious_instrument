@@ -5,21 +5,20 @@ import db from "../firebase/config";
 import { collection, getDocs } from "firebase/firestore";
 import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import axios from "axios";
 
 import "../css/ProjectListPage.css";
 const ProjectListPage = () => {
   //プロジェクトを保持する変数
-  const [projects, setProjects] = useState(null);
+  const [projects, setProjects] = useState([]);
 
   const getAllProjects = async () => {
     try {
-      const response = await axios.post("/task", {
-        project_id: inputId,
-        title: inputTitle,
-        description: inputDescription,
-        method: inputMethod,
+      await axios.get("/database").then((response) => {
+        //表示するデータを作成
+        setProjects(response.data);
+        console.log(response.data.id);
       });
-      console.log(response.data);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -32,7 +31,7 @@ const ProjectListPage = () => {
   return (
     <>
       <h1 className="projectPageTitle">プロジェクト一覧</h1>
-      <ProjectList projects={dummydata} />
+      <ProjectList projects={projects} />
       <div className="projectAddButton">
         <Button variant="outlined" startIcon={<AddIcon />}>
           プロジェクト追加

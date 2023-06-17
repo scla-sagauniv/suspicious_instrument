@@ -11,13 +11,18 @@ const ProjectPage = () => {
   const params = useParams();
   const [datum, setDatum] = useState(null);
 
+  //member追加モーダルのstate
   const [showMemberModal, setShowMemberModal] = useState(false);
   const ShowMemberModal = () => {
     setShowMemberModal(true);
+    setShowTaskModal(false);
   };
+
+  //task追加モーダルのstate
   const [showTaskModal, setShowTaskModal] = useState(false);
   const ShowTaskModal = () => {
     setShowTaskModal(true);
+    setShowMemberModal(false);
   };
   useEffect(() => {
     setDatum(params);
