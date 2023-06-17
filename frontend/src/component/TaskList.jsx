@@ -1,10 +1,7 @@
 import dummydata from "../dummydata.json";
 import { useEffect, useState } from "react";
-<<<<<<< HEAD
 import axios from "axios";
-=======
 import "../css/TaskList.css";
->>>>>>> main
 
 const Task = ({ task }) => {
   return (
