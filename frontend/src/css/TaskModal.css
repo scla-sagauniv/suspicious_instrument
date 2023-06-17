@@ -99,8 +99,8 @@ label {
 .batsu {
   display: block;
   position: absolute;
-  right: 0px;
-  top: 0px;
+  right: 20px;
+  top: 20px;
   width: 20px;
   height: 20px;
   border: 1.5px solid #333; /* 枠の調整 */
