@@ -1,0 +1,23 @@
+body {
+  background-color: #fff;
+}
+
+/* .taskListTitle { */
+
+/* } */
+
+.taskElement {
+  background: #aaffff;
+  padding-left: 10px;
+  border-left: solid 10px #ccc;
+}
+
+.taskName {
+  font-size: 16px;
+  font-weight: 460;
+}
+
+.completeTask {
+  font-size: 13px;
+  font-weight: 360;
+}

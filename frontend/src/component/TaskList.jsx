@@ -1,12 +1,13 @@
 import dummydata from "../dummydata.json";
 import { useEffect, useState } from "react";
+import "../css/TaskList.css";
 
 const Task = ({ task }) => {
   return (
     <>
       <div className="taskElement">
-        <p>{task?.title}</p>
-        <p>{task?.description}</p>
+        <p className="taskName">{task?.title}</p>
+        <p className="completeTask">{task?.description}</p>
       </div>
     </>
   );
