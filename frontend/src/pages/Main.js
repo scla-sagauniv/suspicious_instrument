@@ -1,10 +1,18 @@
 import TestTitle from "../component/TestTitle";
+import Modal from "../component/Modal";
+import { useState } from "react";
 
 const Main = () => {
+  const [showModal, setShowModal] = useState(false);
+  const ShowModal = () => {
+    setShowModal(true);
+  };
   return (
     <>
       <div>
-        <TestTitle />
+        <Modal showFlag={showModal} setShowModal={setShowModal} />
+
+        <button onClick={ShowModal}>Open Modal</button>
       </div>
     </>
   );

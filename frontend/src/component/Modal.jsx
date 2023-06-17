@@ -15,7 +15,7 @@ const Modal = (props) => {
 
   const overlay = {
     position: "fixed",
-    top: 0,
+    top: "100px",
     left: 0,
     width: "100%",
     height: "100%",
@@ -35,7 +35,7 @@ const Modal = (props) => {
   return (
     <>
       {props.showFlag ? (
-        <div class="container">
+        <div className="container">
           <div id="overlay" style={overlay}>
             <div id="modalContent" style={modalContent}>
               <fieldset>
