@@ -10,6 +10,7 @@ const ProjectModal = (props) => {
     background: "white",
     padding: "10px",
     borderRadius: "3px",
+    position: "relative",
   };
 
   //   const overlay = {
@@ -58,6 +59,9 @@ const ProjectModal = (props) => {
                   />
                 </form>
               </fieldset>
+              <div onClick={closeModal}>
+                <span className="batsu"></span>
+              </div>
             </div>
           </div>
         </div>
