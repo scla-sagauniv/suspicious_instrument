@@ -2,3 +2,14 @@
     text-align: center;
     color: blue;
 }
+
+.body{
+    position: relative;
+}
+
+.projectAddButton{
+    position: absolute;
+    left:30px;
+    bottom:100px;
+
+}
