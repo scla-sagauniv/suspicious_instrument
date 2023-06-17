@@ -100,7 +100,7 @@ def update_member(data: Member):
                 member_id = member["id"]
         for i, task in enumerate(database[project]["tasks"]):
             if task["assign_member"] == int(member_id):
-                database[project]["tasks"][i]["assign_member"] = None
+                database[project]["tasks"][i]["assign_member"] = 0
     else:
         pass
     
@@ -111,7 +111,9 @@ def update_member(data: Project):
     database = firebase.get_database(FIREBASE)
     
     if data.method == "add":
-        database.append({'name': data.name, 'members': [], 'tasks': []})
+        ids = list(range(1, len(database) + 2))
+        ids = [id for id in ids if id not in [project["id"] for project in database]]
+        database.append({'id': ids[0], 'name': data.name, 'members': [], 'tasks': []})
     elif data.method == "remove":
         for i, project in enumerate(database):
             if project["name"] == data.name:
