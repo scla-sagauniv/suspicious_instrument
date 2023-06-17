@@ -10,7 +10,7 @@ const Project = ({ datum }) => {
   return (
     <>
       <div className="projectElement" onClick={() => handleClick(datum)}>
-        <h3>{datum?.name}</h3>
+        <h3 className="projectTitle">{datum?.name}</h3>
         <p>タスク数：{datum?.tasks.length}</p>
         <p>メンバー数：{datum?.members.length}</p>
       </div>

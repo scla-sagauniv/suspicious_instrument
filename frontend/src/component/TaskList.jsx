@@ -1,13 +1,17 @@
 import dummydata from "../dummydata.json";
 import { useEffect, useState } from "react";
+<<<<<<< HEAD
 import axios from "axios";
+=======
+import "../css/TaskList.css";
+>>>>>>> main
 
 const Task = ({ task }) => {
   return (
     <>
       <div className="taskElement">
-        <p>{task?.title}</p>
-        <p>{task?.description}</p>
+        <p className="taskName">{task?.title}</p>
+        <p className="completeTask">{task?.description}</p>
       </div>
     </>
   );
