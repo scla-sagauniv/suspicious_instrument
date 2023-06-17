@@ -1,28 +1,29 @@
 import requests
 from fastapi import FastAPI
 from pydantic import BaseModel
-from typing import List
 import json
+import firebase
 
 URL = "https://api.openai.com/v1/chat/completions"
 KEY = ""
 
 app = FastAPI()
-
-class Member(BaseModel):
-    id: int
-    name: str
-    skills: str
-    task_count: int
     
 class Task(BaseModel):
-    id: int
+    project_id: int
     title: str
     description: str
-    assign_member: int
+    method: str
+    
+class Member(BaseModel):
+    project_id: int
+    name: str
+    skills: str
+    method: str
 
-database = json.load(open("./sample/database.json"))[0]
-keywords = list()
+with open ("./sample/database.json") as jsondata:
+    database = json.load(jsondata)[0]
+    keywords = list()
 
 for member in database["members"]:
     for skill in member["skills"].split(", "):
@@ -44,24 +45,32 @@ def send_message_to_chatgpt(message):
 
 @app.post("/task")
 def receive_data(data: Task):
+    firebase_db = firebase.init_database()
+    database = firebase.get_database(firebase_db)
+    
+    for member in database["members"]:
+        for skill in member["skills"].split(", "):
+            if skill not in keywords:
+                keywords.append(skill)
+    
     headers = {"Authorization": f"Bearer {KEY}", "Content-Type": "application/json",}
-    message = "Select 1 keyword for '" + str(data.description) + "' from: " + str(keywords)
-    payload = {"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": message}]}
+    message = "Select a suitable keyword for '" + str(data.description) + "' from: " + str(keywords)
+    payload = {"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "Answer in only 1 word"}, {"role": "user", "content": message}]}
     response = requests.post(URL, headers=headers, json=payload)
     response = response.json()["choices"]
     if response:
-        skill = response[0]["message"]["content"]
-    else:
-        skill = "Not applicable"
-    
-    for member in database["members"]:
-    	for skill in member["skills"].split(", "):
-            continue
+        prediction = response[0]["message"]["content"]
+        available_member = {}
         
-    database.append(Task(id=data.id, title=data.title, description=data.description, assign_member=data.assign_member))
+        for member in database["members"]:
+            if str(skill) in member["skills"]:
+                available_member[data.id] = data
+    else:
+        prediction = "Not applicable"
+        
+    database["tasks"].append({'id': data.id, 'title': data.title, 'description': data.description, 'assign_member': assign})
     
     return {"description": data.description, "assign_member": assign}
-
 
 @app.post("/member")
 def receive_data(data: InputData):
