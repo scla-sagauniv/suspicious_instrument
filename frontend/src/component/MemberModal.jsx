@@ -8,7 +8,6 @@ const MemberModal = (props) => {
     props.setShowMemberModal(false);
   };
   const modalContent = {
-    background: "white",
     padding: "10px",
     borderRadius: "3px",
   };

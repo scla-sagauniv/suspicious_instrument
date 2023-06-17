@@ -12,23 +12,22 @@ const ProjectListPage = () => {
   const [projects, setProjects] = useState(null);
 
   const getAllProjects = async () => {
-    const CollectionRef = collection(db, "Database");
-    getDocs(CollectionRef).then((querySnapshot) => {
-      querySnapshot.docs.forEach((doc) => {
-        console.log(doc.data());
+    try {
+      const response = await axios.post("/task", {
+        project_id: inputId,
+        title: inputTitle,
+        description: inputDescription,
+        method: inputMethod,
       });
-    });
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   //初回読み込みの際にprojectにデータをセットする
   useEffect(() => {
-    const CollectionRef = collection(db, "Database");
-
-    getDocs(CollectionRef).then((querySnapshot) => {
-      querySnapshot.docs.forEach((doc) => {
-        console.log(doc.data());
-      });
-    });
+    getAllProjects();
   });
   return (
     <>

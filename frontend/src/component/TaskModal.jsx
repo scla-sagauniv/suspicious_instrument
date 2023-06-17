@@ -8,7 +8,6 @@ const TaskModal = (props) => {
     props.setShowTaskModal(false);
   };
   const modalContent = {
-    background: "white",
     padding: "10px",
     borderRadius: "3px",
   };

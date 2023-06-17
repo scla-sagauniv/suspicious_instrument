@@ -4,10 +4,21 @@ import TaskList from "../component/TaskList";
 import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import "../css/ProjectPage.css";
+import MemberModal from "../component/MemberModal";
+import TaskModal from "../component/TaskModal";
 
 const ProjectPage = () => {
   const params = useParams();
   const [datum, setDatum] = useState(null);
+
+  const [showMemberModal, setShowMemberModal] = useState(false);
+  const ShowMemberModal = () => {
+    setShowMemberModal(true);
+  };
+  const [showTaskModal, setShowTaskModal] = useState(false);
+  const ShowTaskModal = () => {
+    setShowTaskModal(true);
+  };
   useEffect(() => {
     setDatum(params);
   }, []);
@@ -17,16 +28,29 @@ const ProjectPage = () => {
       <h1 className="ProjectPageTitle">プロジェクトページ</h1>
       <TaskList />
       <div className="taskAddButton">
-        <Button variant="outlined" startIcon={<AddIcon />}>
+        <Button
+          onClick={ShowTaskModal}
+          variant="outlined"
+          startIcon={<AddIcon />}
+        >
           タスク追加
         </Button>
       </div>
 
       <div className="memberAddButton">
-        <Button variant="outlined" startIcon={<AddIcon />}>
+        <Button
+          onClick={ShowMemberModal}
+          variant="outlined"
+          startIcon={<AddIcon />}
+        >
           メンバー追加
         </Button>
       </div>
+      <MemberModal
+        showFlag={showMemberModal}
+        setShowMemberModal={setShowMemberModal}
+      />
+      <TaskModal showFlag={showTaskModal} setShowTaskModal={setShowTaskModal} />
     </>
   );
 };
