@@ -19,7 +19,7 @@ const MemberModal = (props) => {
   const onSubmit = async (data) => {
     // console.log(props.todoList);
     try {
-      await axios.post("../member", data);
+      await axios.post("/member", data);
       console.log("onSubmit data", data);
       console.log(props.project_id);
     } catch (err) {
