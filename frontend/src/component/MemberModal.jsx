@@ -81,6 +81,9 @@ const MemberModal = (props) => {
                 />
               </form>
             </fieldset>
+            <div onClick={closeModal}>
+              <span className="batsu"></span>
+            </div>
           </div>
         </div>
       ) : (
