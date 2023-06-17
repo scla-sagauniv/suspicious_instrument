@@ -1,27 +1,59 @@
 import "../css/test.css";
+import React, { useState } from 'react';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
 
-function TestTitle () {
+function App() {
+  const [inputId, setInputId] = useState("");
+  const [inputTitle, setInputTitle] = useState("");
+  const [inputDescription, setInputDescription] = useState("");
+  const [inputMethod, setInputMethod] = useState("");
 
-  const [data, setData] = useState([])
+  const handleIdChange = (event) => {
+    setInputId(event.target.value);
+  };
 
-  useEffect(()=> {
-    axios.get('/api').then(res => setData(res.data));
-  }, []);
+  const handleTitleChange = (event) => {
+    setInputTitle(event.target.value);
+  };
 
+  const handleDescriptionChange = (event) => {
+    setInputDescription(event.target.value);
+  };
 
-    return data.map((x, index) => {
-    return (
-      <div>
-        <h1>
-          チャットGPTを用いたタスク管理アプリケーション
-        </h1>
-        <p key={index}>
-          {x.id} {x.name} {x.age}
-        </p>
-      </div>)
-  });
-};
+  const handleMethodChange = (event) => {
+    setInputMethod(event.target.value);
+  };
 
-export default TestTitle;
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await axios.post("/task", { project_id: inputId, title: inputTitle, description: inputDescription, method: inputMethod });
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <input type="text" value={inputId} onChange={handleIdChange} />
+        </div>
+        <div>
+        <input type="text" value={inputTitle} onChange={handleTitleChange} />
+        </div>
+        <div>
+        <input type="text" value={inputDescription} onChange={handleDescriptionChange} />
+        </div>
+        <div>
+        <input type="text" value={inputMethod} onChange={handleMethodChange} />
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  );
+}
+
+export default App;
