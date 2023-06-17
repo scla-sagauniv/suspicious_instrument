@@ -84,7 +84,8 @@ function App() {
     event.preventDefault();
 
     try {
-      const response = await axios.post("/member", { project_id: inputId, name: inputName, skills: inputSkills, method: inputMethod });
+      // const response = await axios.post("/member", { project_id: inputId, name: inputName, skills: inputSkills, method: inputMethod });
+      const response = await axios.post("/project", { name: inputName, method: inputMethod });
       console.log(response.data);
     } catch (error) {
       console.error("Error:", error);
