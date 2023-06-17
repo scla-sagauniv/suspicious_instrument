@@ -2,9 +2,11 @@ import "../css/test.css";
 import { useForm } from "react-hook-form";
 import "../css/MemberModal.css";
 import axios from "axios";
+import { useState, useEffect } from "react";
 
 const MemberModal = (props) => {
   const { register, handleSubmit, reset } = useForm();
+
   const closeModal = () => {
     props.setShowMemberModal(false);
   };
@@ -17,8 +19,9 @@ const MemberModal = (props) => {
   const onSubmit = async (data) => {
     // console.log(props.todoList);
     try {
-      await axios.post("member", data);
+      await axios.post("../member", data);
       console.log("onSubmit data", data);
+      console.log(props.project_id);
     } catch (err) {
       console.log(err);
       alert(err.response.data);
@@ -36,14 +39,21 @@ const MemberModal = (props) => {
           <div id="modalContent" style={modalContent}>
             <fieldset>
               <form onSubmit={handleSubmit(onSubmit)} className="form">
+                <input
+                  type="hidden"
+                  id="project_id"
+                  value={"add"}
+                  {...register("method")}
+                  required
+                />
+                <input
+                  type="hidden"
+                  id="name"
+                  value={parseInt(props?.project_id)}
+                  {...register("project_id")}
+                  required
+                />
                 <label className="nameLabel" for="Name">
-                  <input
-                    type="hidden"
-                    id="name"
-                    value={props?.project_id}
-                    {...register("project_id")}
-                    required
-                  />
                   Name
                 </label>
                 <input
@@ -56,10 +66,10 @@ const MemberModal = (props) => {
                 />
                 <label className="skillLabel">Skill</label>
                 <input
-                  className="inputSkill"
+                  className="inputSkills"
                   type="text"
-                  id="skill"
-                  {...register("skill")}
+                  id="skills"
+                  {...register("skills")}
                   placeholder="スキルを入力してください"
                   required
                 />
