@@ -5,7 +5,6 @@ import "../css/ProjectList.css";
 const Project = ({ datum }) => {
   const navigate = useNavigate();
   const handleClick = (datum) => {
-    console.log(datum);
     navigate(`/projectPage/${String(datum?.id)}`);
   };
   return (
@@ -21,7 +20,7 @@ const Project = ({ datum }) => {
 
 const ProjectList = ({ projects }) => {
   const map_project_data = projects?.map((datum) => (
-    <Project datum={datum} key={datum.id} />
+    <Project datum={datum} key={datum.name} />
   ));
   return (
     <>
