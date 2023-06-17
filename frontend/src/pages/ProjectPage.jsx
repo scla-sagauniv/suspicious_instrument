@@ -1,6 +1,8 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-const ProjectPage = ({ state }) => {
+import TaskList from "../component/TaskList";
+
+const ProjectPage = () => {
   const params = useParams();
   const [datum, setDatum] = useState(null);
   useEffect(() => {
@@ -10,7 +12,7 @@ const ProjectPage = ({ state }) => {
   return (
     <>
       <h1>プロジェクトページ</h1>
-      <p>{params.id}</p>
+      <TaskList />
     </>
   );
 };

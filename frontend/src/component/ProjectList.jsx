@@ -25,7 +25,6 @@ const ProjectList = ({ projects }) => {
   ));
   return (
     <>
-      <h1>プロジェクト一覧</h1>
       <div>{map_project_data}</div>
     </>
   );
