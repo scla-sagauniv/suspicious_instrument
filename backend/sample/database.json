@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "name": "Project 1",
     "members": [
       {
@@ -43,6 +44,7 @@
     ]
   },
   {
+    "id": 2,
     "name": "Project 2",
     "members": [
       {

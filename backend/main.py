@@ -8,7 +8,7 @@ import json
 CHATGPT_API_URL = "https://api.openai.com/v1/chat/completions"
 FIREBASE = firebase.init_database()
 
-with open("openai_api.json", "r") as file:
+with open("api.json", "r") as file:
     OPENAI_API_KEY = json.load(file)["api"]
 
 app = FastAPI()
