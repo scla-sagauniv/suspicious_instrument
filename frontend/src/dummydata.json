@@ -45,8 +45,8 @@
         ]
     },
     {
-        "id":1,
-        "name":"project1",
+        "id":2,
+        "name":"project2",
         "members": [
             {
                 "id": 1,

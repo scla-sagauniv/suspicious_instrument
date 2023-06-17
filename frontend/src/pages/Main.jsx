@@ -9,7 +9,7 @@ const Main = () => {
         <Routes>
           <Route path="/" element={<TopPage />} />
           <Route path="/projectListPage" element={<ProjectListPage />} />
-          <Route path="/projectPage/" element={<ProjectPage />} />
+          <Route path="/projectPage/:id" element={<ProjectPage />} />
         </Routes>
       </BrowserRouter>
     </>

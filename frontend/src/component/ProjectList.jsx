@@ -1,13 +1,16 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 //for文で表示するためのコンポーネント
 const Project = ({ datum }) => {
+  const navigate = useNavigate();
+  const handleClick = (id) => {
+    navigate(`/projectPage/${String(id)}`);
+  };
   return (
     <>
-      <p>{datum.name}</p>
-      <Link to="/projectPage" id={datum.id}>
-        プロジェクト{datum?.id}
-      </Link>
+      <div onClick={() => handleClick(datum?.id)}>
+        <p>{datum.name}</p>
+      </div>
     </>
   );
 };
