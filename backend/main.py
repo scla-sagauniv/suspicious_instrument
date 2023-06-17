@@ -16,7 +16,7 @@ DB: List[InputData] = [
 ]
 
 CHATGPT_API_URL = "https://api.openai.com/v1/chat/completions"
-OPENAI_API_KEY = ""
+OPENAI_API_KEY = "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"
 
 def send_message_to_chatgpt(message):
     headers = {
@@ -34,17 +34,17 @@ def send_message_to_chatgpt(message):
 def receive_data(data: InputData):
     received_data = data.name
     received_description = data.description
-    DB.append(InputData(name=received_data, description=received_description, label=""))
 
     chatgpt_response = send_message_to_chatgpt(received_description)
-    # choices = chatgpt_response["choices"]
-    # if choices:
-    #     label = choices[0]["message"]["content"]
-    #     data.label = label
-    # else:
-    #     data.label = "No response from ChatGPT"
+    choices = chatgpt_response["choices"]
+    if choices:
+        label = choices[0]["message"]["content"]
+        data.label = label
+    else:
+        data.label = "No response from ChatGPT"
+    DB.append(InputData(name=received_data, description=received_description, label=data.label))
     
-    return {"data": received_data, "description": received_description, "label": chatgpt_response}
+    return {"data": received_data, "description": received_description, "label": data.label}
 
 @app.get("/")
 def read_root():
