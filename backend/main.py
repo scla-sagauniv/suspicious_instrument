@@ -8,7 +8,7 @@ import json
 CHATGPT_API_URL = "https://api.openai.com/v1/chat/completions"
 FIREBASE = firebase.init_database()
 
-with open("openai_api.json", "r") as file:
+with open("api.json", "r") as file:
     OPENAI_API_KEY = json.load(file)["api"]
 
 app = FastAPI()
@@ -23,6 +23,10 @@ class Member(BaseModel):
     project_id: int
     name: str
     skills: str
+    method: str
+    
+class Project(BaseModel):
+    name: str
     method: str
 
 # Taskの変更を処理する
@@ -96,11 +100,28 @@ def update_member(data: Member):
                 member_id = member["id"]
         for i, task in enumerate(database[project]["tasks"]):
             if task["assign_member"] == int(member_id):
-                database[project]["tasks"][i]["assign_member"] = None
+                database[project]["tasks"][i]["assign_member"] = 0
     else:
         pass
     
-    firebase.write_database(FIREBASE, database)                
+    firebase.write_database(FIREBASE, database)
+    
+@app.post("/project")
+def update_member(data: Project):
+    database = firebase.get_database(FIREBASE)
+    
+    if data.method == "add":
+        ids = list(range(1, len(database) + 2))
+        ids = [id for id in ids if id not in [project["id"] for project in database]]
+        database.append({'id': ids[0], 'name': data.name, 'members': [], 'tasks': []})
+    elif data.method == "remove":
+        for i, project in enumerate(database):
+            if project["name"] == data.name:
+                database.pop(i)
+    else:
+        pass
+    
+    firebase.write_database(FIREBASE, database)       
 
 @app.get("/database")
 def get_cloud_database():
