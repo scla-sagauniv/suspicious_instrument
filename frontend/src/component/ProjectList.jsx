@@ -1,15 +1,19 @@
 import { useNavigate } from "react-router-dom";
+import "../css/ProjectList.css";
 
 //for文で表示するためのコンポーネント
 const Project = ({ datum }) => {
   const navigate = useNavigate();
-  const handleClick = (id) => {
-    navigate(`/projectPage/${String(id)}`);
+  const handleClick = (datum) => {
+    console.log(datum);
+    navigate(`/projectPage/${String(datum?.id)}`);
   };
   return (
     <>
-      <div onClick={() => handleClick(datum?.id)}>
-        <p>{datum.name}</p>
+      <div className="projectElement" onClick={() => handleClick(datum)}>
+        <h3>{datum?.name}</h3>
+        <p>タスク数：{datum?.tasks.length}</p>
+        <p>メンバー数：{datum?.members.length}</p>
       </div>
     </>
   );

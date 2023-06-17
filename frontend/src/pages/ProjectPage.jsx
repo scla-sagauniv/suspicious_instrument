@@ -1,7 +1,11 @@
 import { useLocation, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-const ProjectPage = () => {
+const ProjectPage = ({ state }) => {
   const params = useParams();
+  const [datum, setDatum] = useState(null);
+  useEffect(() => {
+    setDatum(params);
+  }, []);
 
   return (
     <>
