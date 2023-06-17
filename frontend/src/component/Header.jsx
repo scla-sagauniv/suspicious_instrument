@@ -1,8 +1,9 @@
+import "../css/Header.css";
 const Header = () => {
   return (
     <>
       <div className="headerArea">
-        <span>タスク管理アプリ</span>
+        <h1 className="headerTitle">タスク管理アプリ</h1>
       </div>
     </>
   );

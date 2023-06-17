@@ -1,9 +1,12 @@
 import "../css/test.css";
 import { useForm } from "react-hook-form";
 import "../css/MemberModal.css";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 const MemberModal = (props) => {
   const { register, handleSubmit, reset } = useForm();
+
   const closeModal = () => {
     props.setShowMemberModal(false);
   };
@@ -13,22 +16,19 @@ const MemberModal = (props) => {
     borderRadius: "3px",
   };
 
-  const overlay = {
-    position: "fixed",
-    top: "100px",
-    left: 0,
-    width: "100%",
-    height: "100%",
-    backgroundColor: "rgba(0,0,0,0.5)",
-
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  };
-
-  const onSubmit = (data) => {
-    console.log("onSubmit data", data);
-    console.log(props.todoList);
+  const onSubmit = async (data) => {
+    // console.log(props.todoList);
+    try {
+      await axios.post("../member", data);
+      console.log("onSubmit data", data);
+      console.log(props.project_id);
+    } catch (err) {
+      console.log(err);
+      alert(err.response.data);
+    } finally {
+      console.log(data);
+    }
+    reset();
     closeModal();
   };
 
@@ -36,37 +36,51 @@ const MemberModal = (props) => {
     <>
       {props.showFlag ? (
         <div className="container">
-          <div id="overlay" style={overlay}>
-            <div id="modalContent" style={modalContent}>
-              <fieldset>
-                <form onSubmit={handleSubmit(onSubmit)} className="form">
-                  <label className="nameLabel" for="Name">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    {...register("name")}
-                    placeholder="名前を入力してください"
-                    required
-                  />
-                  <label className="skillLabel">Skill</label>
-                  <input
-                    type="text"
-                    id="skill"
-                    {...register("skill")}
-                    placeholder="スキルを入力してください"
-                    required
-                  />
-                  <input
-                    id="submit_btn"
-                    type="submit"
-                    value="送信"
-                    className="submit-button"
-                  />
-                </form>
-              </fieldset>
-            </div>
+          <div id="modalContent" style={modalContent}>
+            <fieldset>
+              <form onSubmit={handleSubmit(onSubmit)} className="form">
+                <input
+                  type="hidden"
+                  id="method"
+                  value={"add"}
+                  {...register("method")}
+                  required
+                />
+                <input
+                  type="hidden"
+                  id="project_id"
+                  value={parseInt(props?.project_id)}
+                  {...register("project_id")}
+                  required
+                />
+                <label className="nameLabel" for="Name">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  {...register("name")}
+                  placeholder="名前を入力してください"
+                  required
+                  className="inputName"
+                />
+                <label className="skillLabel">Skill</label>
+                <input
+                  className="inputSkills"
+                  type="text"
+                  id="skills"
+                  {...register("skills")}
+                  placeholder="スキルを入力してください"
+                  required
+                />
+                <input
+                  id="submit_btn"
+                  type="submit"
+                  value="送信"
+                  className="submit-button"
+                />
+              </form>
+            </fieldset>
           </div>
         </div>
       ) : (

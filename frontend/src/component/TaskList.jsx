@@ -20,8 +20,8 @@ const TaskList = () => {
     setTasks(dummydata[0].tasks);
   });
 
-  const map_tasks_data = tasks?.map((task) => (
-    <Task task={task} key={task.id} />
+  const map_tasks_data = tasks?.map((task, index) => (
+    <Task key={index} task={task} />
   ));
   return (
     <>

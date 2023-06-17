@@ -6,7 +6,7 @@ import Header from "../component/Header";
 const Main = () => {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<TopPage />} />
