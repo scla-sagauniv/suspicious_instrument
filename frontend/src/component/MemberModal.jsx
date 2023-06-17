@@ -13,22 +13,10 @@ const MemberModal = (props) => {
     borderRadius: "3px",
   };
 
-  const overlay = {
-    position: "fixed",
-    top: "100px",
-    left: 0,
-    width: "100%",
-    height: "100%",
-    backgroundColor: "rgba(0,0,0,0.5)",
-
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  };
-
   const onSubmit = (data) => {
     console.log("onSubmit data", data);
     console.log(props.todoList);
+    reset();
     closeModal();
   };
 
@@ -36,37 +24,37 @@ const MemberModal = (props) => {
     <>
       {props.showFlag ? (
         <div className="container">
-          <div id="overlay" style={overlay}>
-            <div id="modalContent" style={modalContent}>
-              <fieldset>
-                <form onSubmit={handleSubmit(onSubmit)} className="form">
-                  <label className="nameLabel" for="Name">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    {...register("name")}
-                    placeholder="名前を入力してください"
-                    required
-                  />
-                  <label className="skillLabel">Skill</label>
-                  <input
-                    type="text"
-                    id="skill"
-                    {...register("skill")}
-                    placeholder="スキルを入力してください"
-                    required
-                  />
-                  <input
-                    id="submit_btn"
-                    type="submit"
-                    value="送信"
-                    className="submit-button"
-                  />
-                </form>
-              </fieldset>
-            </div>
+          <div id="modalContent" style={modalContent}>
+            <fieldset>
+              <form onSubmit={handleSubmit(onSubmit)} className="form">
+                <label className="nameLabel" for="Name">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  {...register("name")}
+                  placeholder="名前を入力してください"
+                  required
+                  className="inputName"
+                />
+                <label className="skillLabel">Skill</label>
+                <input
+                  className="inputSkill"
+                  type="text"
+                  id="skill"
+                  {...register("skill")}
+                  placeholder="スキルを入力してください"
+                  required
+                />
+                <input
+                  id="submit_btn"
+                  type="submit"
+                  value="送信"
+                  className="submit-button"
+                />
+              </form>
+            </fieldset>
           </div>
         </div>
       ) : (
