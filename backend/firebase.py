@@ -21,6 +21,8 @@ def get_database(database):
     return json_data
 
 def write_database(database, new_json):
+    for document in database.collection('Database').list_documents():
+        document.delete()
     for data in new_json:
         database.collection('Database').document(data["name"]).set(data)
         
@@ -29,6 +31,7 @@ def write_database(database, new_json):
 # database = firestore.client()
 # with open("./sample/database.json", "r") as file:
 #     datas = json.load(file)
-
+# for document in database.collection('Database').list_documents():
+#     document.delete()
 # for data in datas:
 #     database.collection('Database').document(data["name"]).set(data)
