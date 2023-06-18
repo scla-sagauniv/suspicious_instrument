@@ -1,0 +1,11 @@
+.memberNameDiv{
+    width:200px;
+    position: absolute;
+    background-color: aquamarine;
+    right:10%;
+    top:50px;
+}
+
+.membersTitle{
+    text-align: center;
+}

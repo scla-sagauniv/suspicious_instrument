@@ -8,6 +8,7 @@ import MemberModal from "../component/MemberModal";
 import TaskModal from "../component/TaskModal";
 import { useLocation } from "react-router-dom";
 import { serverTimestamp } from "firebase/firestore";
+import MemberList from "../component/MemberList";
 
 const ProjectPage = () => {
   const pathid = parseInt(useLocation().pathname.slice(-1));
@@ -28,17 +29,11 @@ const ProjectPage = () => {
     setShowMemberModal(false);
   };
 
-  // const setIdFromPath = () => {
-  //   setProjectId(pathname);
-  // };
-  // useEffect(as () => {
-  //   setProjectId(pathid);
-  // }, []);
-
   return (
     <>
       <h1 className="ProjectPageTitle">プロジェクトページ</h1>
       <TaskList pathid={pathid} />
+      <MemberList className="memberListDiv" pathid={pathid} />
       <div className="taskAddButton">
         <Button
           onClick={ShowTaskModal}
