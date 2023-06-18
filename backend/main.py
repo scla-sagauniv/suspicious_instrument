@@ -57,17 +57,18 @@ def update_task(data: Task):
                 available_member = sorted(available_member, reverse=True)
                 for i, member in enumerate(database[project]["members"]):
                     if member["id"] == int(available_member[0]):
+                        available_member = [member["id"], member["name"]]
                         database[project]["members"][i]["task_count"] += 1
         else:
             available_member = {member["id"]: member["task_count"] for member in database[project]["members"]}
             available_member = sorted(available_member, reverse=True)
             for i, member in enumerate(database[project]["members"]):
                 if member["id"] == int(available_member[0]):
+                    available_member = [member["id"], member["name"]]
                     database[project]["members"][i]["task_count"] += 1
-        
         ids = list(range(1, len(database[project]["tasks"]) + 2))
         ids = [id for id in ids if id not in [task["id"] for task in database[project]["tasks"]]]
-        database[project]["tasks"].append({'id': ids[0], 'title': data.title, 'description': data.description, 'assign_member': int(available_member[0])})
+        database[project]["tasks"].append({'id': ids[0], 'title': data.title, 'description': data.description, 'assign_member': available_member[0], 'assign_member_name': available_member[1]})
     elif data.method == "remove":
         member_id = None
         for i, task in enumerate(database[project]["tasks"]):
@@ -81,7 +82,7 @@ def update_task(data: Task):
         pass
     
     firebase.write_database(FIREBASE, database)
-    # return {"debug": data.description}
+    # return {"debug": available_member}
     
 @app.post("/member")
 def update_member(data: Member):
