@@ -46,10 +46,11 @@ def update_task(data: Task):
         payload = {
             "model": "gpt-3.5-turbo",
             "messages": [{"role": "system", "content": "Answer in only 1 word"}, {"role": "user", "content": message}],
-        }    
-        response = requests.post(CHATGPT_API_URL, headers=headers, json=payload).json()["choices"]
+        }
+        
         available_member = {}
-        if response:
+        try:    
+            response = requests.post(CHATGPT_API_URL, headers=headers, json=payload).json()["choices"]
             prediction = str(response[0]["message"]["content"]).translate(str.maketrans("", "", string.punctuation.replace("+", "")))
             available_member = {member["id"]: member["task_count"] for member in database[project]["members"] if prediction in member["skills"]}
             
@@ -59,13 +60,14 @@ def update_task(data: Task):
                     if member["id"] == int(available_member[0]):
                         available_member = [member["id"], member["name"]]
                         database[project]["members"][i]["task_count"] += 1
-        else:
+        except:
             available_member = {member["id"]: member["task_count"] for member in database[project]["members"]}
             available_member = sorted(available_member, reverse=True)
             for i, member in enumerate(database[project]["members"]):
                 if member["id"] == int(available_member[0]):
                     available_member = [member["id"], member["name"]]
                     database[project]["members"][i]["task_count"] += 1
+                    
         ids = list(range(1, len(database[project]["tasks"]) + 2))
         ids = [id for id in ids if id not in [task["id"] for task in database[project]["tasks"]]]
         database[project]["tasks"].append({'id': ids[0], 'title': data.title, 'description': data.description, 'assign_member': available_member[0], 'assign_member_name': available_member[1]})
