@@ -30,6 +30,7 @@ const MemberModal = (props) => {
     }
     reset();
     closeModal();
+    window.location.reload();
   };
 
   return (

@@ -27,6 +27,7 @@ const TaskModal = (props) => {
     }
     reset();
     closeModal();
+    window.location.reload();
   };
 
   return (
