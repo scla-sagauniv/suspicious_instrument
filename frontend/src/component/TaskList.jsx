@@ -9,6 +9,7 @@ const Task = ({ task }) => {
       <div className="taskElement">
         <p className="taskName">{task?.title}</p>
         <p className="completeTask">{task?.description}</p>
+        <p className="completeTask">{task?.assign_member_name}</p>
       </div>
     </>
   );
@@ -16,14 +17,12 @@ const Task = ({ task }) => {
 
 const TaskList = ({ pathid }) => {
   const [tasks, setTasks] = useState(null);
-  const [members, setMembers] = useState(null);
   const getAllProjects = async () => {
     const pid = parseInt(pathid);
     try {
       await axios.get("/database").then((response) => {
         //表示するデータを作成
         setTasks(response.data[pid - 1].tasks);
-        setMembers(response.data[pid - 1].members);
       });
     } catch (error) {
       console.error("Error:", error);
