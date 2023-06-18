@@ -27,19 +27,22 @@
         "id": 1,
         "title": "Task 1",
         "description": "Complete task 1",
-        "assign_member": 1
+        "assign_member": 1,
+        "assign_member_name": "John Doe"
       },
       {
         "id": 2,
         "title": "Task 2",
         "description": "Complete task 2",
-        "assign_member": 2
+        "assign_member": 2,
+        "assign_member_name": "Jane Smith"
       },
       {
         "id": 3,
         "title": "Task 3",
         "description": "Complete task 3",
-        "assign_member": 1
+        "assign_member": 1,
+        "assign_member_name": "John Doe"
       }
     ]
   },
@@ -65,7 +68,8 @@
         "id": 1,
         "title": "Task 4",
         "description": "Complete task 1",
-        "assign_member": 1
+        "assign_member": 1,
+        "assign_member_name": "John Doe"
       }
     ]
   }
