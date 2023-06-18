@@ -45,3 +45,8 @@ main {
   width: 100%;
   text-align: center;
 }
+
+.navigateButton{
+  position: fixed;
+  z-index: 3;
+}

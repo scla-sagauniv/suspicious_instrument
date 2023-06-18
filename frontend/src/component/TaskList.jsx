@@ -7,9 +7,9 @@ const Task = ({ task }) => {
   return (
     <>
       <div className="taskElement">
-        <p className="taskName">{task?.title}</p>
-        <p className="completeTask">{task?.description}</p>
-        <p className="completeTask">{task?.assign_member_name}</p>
+        <p className="taskName">タイトル：{task?.title}</p>
+        <p className="completeTask">説明：{task?.description}</p>
+        <p className="completeTask">担当：{task?.assign_member_name}</p>
       </div>
     </>
   );
@@ -22,6 +22,7 @@ const TaskList = ({ pathid }) => {
     try {
       await axios.get("/database").then((response) => {
         //表示するデータを作成
+
         setTasks(response.data[pid - 1].tasks);
       });
     } catch (error) {
