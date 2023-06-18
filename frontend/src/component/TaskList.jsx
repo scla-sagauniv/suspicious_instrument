@@ -24,7 +24,6 @@ const TaskList = ({ pathid }) => {
         //表示するデータを作成
         setTasks(response.data[pid - 1].tasks);
         setMembers(response.data[pid - 1].members);
-        const assigned_member = members.indexOf();
       });
     } catch (error) {
       console.error("Error:", error);
