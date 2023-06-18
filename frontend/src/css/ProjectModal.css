@@ -90,7 +90,7 @@ label {
   align-items: center;
 }
 
-.batsu {
+.batsuProject {
   display: block;
   position: absolute;
   right: 0px;
@@ -102,8 +102,8 @@ label {
   background: #fff; /* ボタンの背景色 */
 }
 
-.batsu::before,
-.batsu::after {
+.batsuProject::before,
+.batsuProject::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -113,10 +113,10 @@ label {
   background: #333; /* バツ印の色 */
 }
 
-.batsu::before {
+.batsuProject::before {
   transform: translate(-50%, -50%) rotate(45deg);
 }
 
-.batsu::after {
+.batsuProject::after {
   transform: translate(-50%, -50%) rotate(-45deg);
 }

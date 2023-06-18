@@ -38,7 +38,7 @@ const ProjectPage = () => {
   return (
     <>
       <h1 className="ProjectPageTitle">プロジェクトページ</h1>
-      <TaskList />
+      <TaskList pathid={pathid} />
       <div className="taskAddButton">
         <Button
           onClick={ShowTaskModal}

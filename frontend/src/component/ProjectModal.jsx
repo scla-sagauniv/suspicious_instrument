@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import "../css/ProjectModal.css";
+import axios from "axios";
 
 const ProjectModal = (props) => {
   const { register, handleSubmit, reset } = useForm();
@@ -26,9 +27,18 @@ const ProjectModal = (props) => {
   //     justifyContent: "center",
   //   };
 
-  const onSubmit = (data) => {
-    console.log("onSubmit data", data);
-    console.log(props.todoList);
+  const onSubmit = async (data) => {
+    try {
+      await axios.post("/project", data);
+      console.log("onSubmit data", data);
+      console.log(props.project_id);
+    } catch (err) {
+      console.log(err);
+      alert(err.response.data);
+    } finally {
+      console.log(data);
+    }
+    reset();
     closeModal();
   };
 
@@ -40,6 +50,13 @@ const ProjectModal = (props) => {
             <div id="modalContent" style={modalContent}>
               <fieldset>
                 <form onSubmit={handleSubmit(onSubmit)} className="form">
+                  <input
+                    type="hidden"
+                    id="method"
+                    value={"add"}
+                    {...register("method")}
+                    required
+                  />
                   <label className="nameLabel" for="Name">
                     Name
                   </label>
@@ -60,7 +77,7 @@ const ProjectModal = (props) => {
                 </form>
               </fieldset>
               <div onClick={closeModal}>
-                <span className="batsu"></span>
+                <span className="batsuProject"></span>
               </div>
             </div>
           </div>
