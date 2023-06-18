@@ -40,6 +40,7 @@ const ProjectModal = (props) => {
     }
     reset();
     closeModal();
+    window.location.reload();
   };
 
   return (
