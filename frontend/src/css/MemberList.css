@@ -1,11 +1,15 @@
 .memberNameDiv{
-    width:200px;
+    width:350px;
     position: absolute;
     background-color: aquamarine;
-    right:10%;
+    right:5%;
     top:50px;
 }
 
 .membersTitle{
     text-align: center;
+}
+
+.skills{
+    text-align: left;
 }
