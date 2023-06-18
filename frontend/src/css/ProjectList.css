@@ -4,10 +4,12 @@
   width: 40%;
   align-items: center;
   background-color: aqua;
+  padding-bottom: 5px;
 }
 
 .projectTitle {
   margin-left: 5px;
   width: 40%;
   border-bottom: solid 2px #111;
+  padding-left: 3%;
 }

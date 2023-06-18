@@ -1,0 +1,47 @@
+.subtitleTop {
+  text-align: center;
+  font-family: "Hiragino Sans W3", "Hiragino Kaku Gothic ProN",
+    "ヒラギノ角ゴ ProN W3", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic",
+    sans-serif;
+  margin: 0 10px 10px 10px;
+  border: 1px solid aliceblue;
+  background-color: aliceblue;
+  padding: 5px;
+}
+.titleTop {
+  text-align: center;
+  font-size: 60px;
+  font-family: "Roboto", arial, sans-serif;
+  line-height: 30px;
+  color: aliceblue;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  min-height: 100vh;
+  background-color: darkblue;
+  padding-top: 60px;
+}
+
+.container {
+  height: 100%;
+  margin: 0;
+}
+
+.LinkTop {
+  margin-left: auto;
+  margin-right: auto;
+  color: yellow;
+  font-size: 16px;
+}
+
+.LinkDiv {
+  width: 100%;
+  text-align: center;
+}
