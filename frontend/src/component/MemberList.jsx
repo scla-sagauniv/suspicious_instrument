@@ -5,6 +5,7 @@ const Member = ({ member }) => {
   return (
     <>
       <li>{member?.name}</li>
+      <p className="skills">{member?.skills}</p>
     </>
   );
 };
