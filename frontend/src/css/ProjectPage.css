@@ -1,0 +1,21 @@
+.ProjectPageTitle{
+    text-align: center;
+}
+
+
+.body{
+    position: relative;
+}
+
+.taskAddButton{
+    position: absolute;
+    left:10px;
+    bottom:100px;
+
+}
+.memberAddButton{
+    position: absolute;
+    left:10px;
+    bottom:50px;
+
+}

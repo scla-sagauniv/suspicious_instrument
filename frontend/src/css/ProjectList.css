@@ -1,0 +1,13 @@
+.projectElement {
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+  align-items: center;
+  background-color: aqua;
+}
+
+.projectTitle {
+  margin-left: 5px;
+  width: 40%;
+  border-bottom: solid 2px #111;
+}

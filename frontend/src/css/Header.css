@@ -1,0 +1,13 @@
+.headerArea{
+    position:fixed;
+    background-color: #1e5099;
+    width: 100%;
+    height:80px;
+    top:0px;
+}
+
+.headerTitle{
+    text-align: left;
+    margin-left: 20px;
+
+}
